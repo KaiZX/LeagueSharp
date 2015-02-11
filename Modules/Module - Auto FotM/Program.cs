@@ -53,6 +53,7 @@ namespace Module_Auto_FotM
         }
         static void Game_OnGameLoad(EventArgs args)
         {
+            Game.PrintChat("<font color='#00AA00'[Module] Auto Face Of The Mountain - ACTIVATED!</font>");
             InitMenu();
             Game.OnGameUpdate += Game_OnGameUpdate;
         }        
