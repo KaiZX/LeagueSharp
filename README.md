@@ -12,6 +12,7 @@ Highly customizable module that allows you to level up your spells without press
 Have 2 chat commands.
 1) #auto [name] - if you have received message that program was found a pre-made skilllist, you can put name there and initalize everything automatically.
 2) #custom 1 2 3 4 5 6 7 8 9 10...18 - custom AutoLevel. Use 1, 2, 3 and 4 for Q, W, E, R skills. Finally, you will have something like this: #custom 1 3 2 1 1 4 1 2 1 2 4 2 2 3 3 4 3 3
+In future, maybe, will add Q W E R instead of 1 2 3 4
 	
 Module - Potion Manager
 Automatically uses HP and MP potions (Flasks and Buisquits also included!)
