@@ -21,7 +21,7 @@ namespace Module_Potion_Manager
         // Menu Init Function
         static void InitMenu()
         {
-            Config = new Menu("[Module] Potion Manager", "PotionManager", true);
+            Config = new Menu("[Module] Potion Manager", "Module_PotionManager", true);
 
             Config.AddSubMenu(new Menu("Health Potion/Bisquit", "HP"));
             Config.SubMenu("HP").AddItem(new MenuItem("hp_use", "Use those?").SetValue(true));
