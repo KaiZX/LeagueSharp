@@ -128,7 +128,7 @@ namespace Just_Auto_XinZhao
             Config.AddItem(new MenuItem("W_Setting", "Cast W condition").SetValue(new StringList(new[] { "Never", "After Q", "After E", "Always if near enemy hero" }, 0)));
 
             Config.AddItem(new MenuItem("Label4", "- E functions -"));
-            Config.AddItem(new MenuItem("E_Setting", "Cast E condition").SetValue(new StringList(new[] { "Never", "Mouse Selected Target" }, 0)));
+            Config.AddItem(new MenuItem("E_Setting", "Cast E condition").SetValue(new StringList(new[] { "Never", "Mouse Selected Target + Toggle", "Mouse Selected Target Always" }, 0)));
             Config.AddItem(new MenuItem("Smite_After_E", "Cast SMITE if can?").SetValue(new StringList(new[] { "Always Off", "On Toggle", "Always On" }, 2)));
             Config.AddItem(new MenuItem("Items_After_E", "Cast ITEMS if can?").SetValue(new StringList(new[] { "Always Off", "On Toggle", "Always On" }, 2)));
 
@@ -196,17 +196,20 @@ namespace Just_Auto_XinZhao
         // Just "NearEnemySkill" function
         static void Skills()
         {
-            var Target = HeroManager.Enemies.Where(x => Player.Distance3D(x) < 250f).FirstOrDefault();
-            if (Target == null)
-                return;
-
-            if (Q_SettingStatus == 3)
+            var SelectedTarget = TargetSelector.GetSelectedTarget();
+            if (SelectedTarget.IsValidTarget())
             {
-                CastQ();
+                if ((E_SettingStatus == 2) || (E_SettingStatus == 1 && KeyToggled))
+                    CastE(SelectedTarget);
             }
-            if (W_SettingStatus == 3)
+
+            var Target = HeroManager.Enemies.Where(x => Player.Distance3D(x) < 250f).FirstOrDefault();
+            if (Target != null)
             {
-                CastW();
+                if (Q_SettingStatus == 3)
+                    CastQ();
+                if (W_SettingStatus == 3)
+                    CastW();
             }
         }
         // Draw ER KS functions
