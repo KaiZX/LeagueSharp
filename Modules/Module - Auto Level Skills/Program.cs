@@ -31,7 +31,7 @@ namespace Module_Auto_Level_Skills
         // Menu Init Function
         static void InitMenu()
         {
-            _config = new Menu("AutoLeveler", "AutoLeveler", true);
+            _config = new Menu("[Module] Auto Level Skills", "Module_AutoLevelSkills", true);
             _config.AddItem(new MenuItem("Enabled", "Enabled?").SetValue(true));
             _config.AddToMainMenu();
         }
