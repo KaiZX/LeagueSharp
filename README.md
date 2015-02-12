@@ -26,4 +26,5 @@ Automatically uses HP and MP potions (Flasks and Buisquits also included!)
 **Available now:**
 ```
 Garen (KS R, E when near enemy, W to protect from targetted skillshot (like Taric's E, not tested yet, but seems to be working)). Q left for fully manual use.
+XinZhao (Highly customizable. E+R KS, Cast Q after AA, after W, after E, always, cast W after Q, after E, always, ToggleKey). SmiteKey support and Items (only Ghostblade for now) support
 ```
