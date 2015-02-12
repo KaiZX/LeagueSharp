@@ -128,7 +128,7 @@ namespace Just_Auto_XinZhao
             Config.AddItem(new MenuItem("W_Setting", "Cast W condition").SetValue(new StringList(new[] { "Never", "After Q", "After E", "Always if near enemy hero" }, 0)));
 
             Config.AddItem(new MenuItem("Label4", "- E functions -"));
-            Config.AddItem(new MenuItem("E_Setting", "Cast E condition").SetValue(new StringList(new[] { "Never", "Mouse Selected Target + Toggle", "Mouse Selected Target Always" }, 0)));
+            Config.AddItem(new MenuItem("E_Setting", "(Not working) Cast E condition").SetValue(new StringList(new[] { "Never", "Mouse Selected Target + Toggle", "Mouse Selected Target Always" }, 0)));
             Config.AddItem(new MenuItem("Smite_After_E", "Cast SMITE if can?").SetValue(new StringList(new[] { "Always Off", "On Toggle", "Always On" }, 2)));
             Config.AddItem(new MenuItem("Items_After_E", "Cast ITEMS if can?").SetValue(new StringList(new[] { "Always Off", "On Toggle", "Always On" }, 2)));
 
@@ -154,9 +154,9 @@ namespace Just_Auto_XinZhao
         // Roulette Variables
         static bool KeyToggled { get { return Config.Item("KeyToggle").GetValue<KeyBind>().Active; } }
         static int Q_SettingStatus { get { return Config.Item("Q_Setting").GetValue<StringList>().SelectedIndex; } }
-        static int Q_SettingAAStatus { get { return Config.Item("Q_Setting").GetValue<StringList>().SelectedIndex; } }
+        static int Q_SettingAAStatus { get { return Config.Item("Q_SettingAA").GetValue<StringList>().SelectedIndex; } }
         static int W_SettingStatus { get { return Config.Item("W_Setting").GetValue<StringList>().SelectedIndex; } }
-        static int E_SettingStatus { get { return Config.Item("E_Setting").GetValue<StringList>().SelectedIndex; } }
+        // static int E_SettingStatus { get { return Config.Item("E_Setting").GetValue<StringList>().SelectedIndex; } }
         static int ESMITE_SettingStatus { get { return Config.Item("Smite_After_E").GetValue<StringList>().SelectedIndex; } }
         static int EITEMS_SettingStatus { get { return Config.Item("Items_After_E").GetValue<StringList>().SelectedIndex; } }
         static int EKS_SettingStatus { get { return Config.Item("KillSecure_E").GetValue<StringList>().SelectedIndex; } }
@@ -196,13 +196,6 @@ namespace Just_Auto_XinZhao
         // Just "NearEnemySkill" function
         static void Skills()
         {
-            var SelectedTarget = TargetSelector.GetSelectedTarget();
-            if (SelectedTarget.IsValidTarget())
-            {
-                if ((E_SettingStatus == 2) || (E_SettingStatus == 1 && KeyToggled))
-                    CastE(SelectedTarget);
-            }
-
             var Target = HeroManager.Enemies.Where(x => Player.Distance3D(x) < 250f).FirstOrDefault();
             if (Target != null)
             {
@@ -235,6 +228,9 @@ namespace Just_Auto_XinZhao
         }
         static void DrawOptimalTarget()
         {
+            if (!Config.Item("DrawOptimal").GetValue<bool>())
+                return;
+
             var Target = TargetSelector.GetTarget(1250f, TargetSelector.DamageType.Physical);
             if (Target.IsValidTarget())
                 Render.Circle.DrawCircle(Target.Position, 100f, Color.Lime);
