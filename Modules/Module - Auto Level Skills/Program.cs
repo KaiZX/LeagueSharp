@@ -46,13 +46,38 @@ namespace Module_Auto_Level_Skills
         // Load DataBase
         static void LoadDB()
         {
-            AddToDB("Akali", "standart", "R->Q->E->W", new int[] { 1, 3, 2, 1, 1, 4, 1, 3, 1, 3, 4, 3, 3, 2, 2, 4, 2, 2 });
+            // AddToDB("Name", "ID", "R->E->Q->W", new int[] { 1, 3, 2, 3, 3, 4, 3, 1, 3, 1, 4, 1, 1, 2, 2, 4, 2, 2 });
 
-            AddToDB("MasterYi", "lane", "R->E->Q->W", new int[] { 1, 3, 2, 3, 3, 4, 3, 1, 3, 1, 4, 1, 1, 2, 2, 4, 2, 2 });
-            AddToDB("MasterYi", "jungle", "R->Q->E->W", new int[] { 1, 3, 2, 1, 1, 4, 1, 3, 1, 3, 4, 3, 3, 2, 2, 4, 2, 2 });
+            AddToDB("Aatrox", "jungle", "R->W->E->Q - Max W to sustain/damage", new int[] { 2, 1, 3, 2, 2, 4, 2, 3, 2, 3, 4, 3, 3, 1, 1, 4, 1, 1 });
+            AddToDB("Aatrox", "top", "R->W+E->Q - Max W and E to super pokes", new int[] { 3, 2, 1, 2, 3, 4, 2, 3, 2, 3, 4, 2, 3, 1, 1, 4, 1, 1 });
 
-            AddToDB("Taric", "heal", "R->W->Q->E", new int[] { 2, 3, 2, 1, 2, 4, 2, 1, 2, 1, 4, 1, 1, 3, 3, 4, 3, 3 });
-            AddToDB("Taric", "stun", "R->W->E->Q", new int[] { 2, 3, 1, 2, 2, 4, 2, 3, 2, 3, 4, 3, 3, 1, 1, 4, 1, 1 });
+            AddToDB("Ahri", "midQ", "R->Q->W->E - W taking at 4.", new int[] { 1, 3, 1, 2, 1, 4, 1, 2, 1, 2, 4, 2, 2, 3, 3, 4, 3, 3 });
+            AddToDB("Ahri", "midW", "R->Q->W->E - W taking at 3.", new int[] { 1, 3, 2, 1, 1, 4, 1, 2, 1, 2, 4, 2, 2, 3, 3, 4, 3, 3 });
+
+            AddToDB("Akali", "mid", "R->Q->E->W - W at lvl 3", new int[] { 1, 3, 2, 1, 1, 4, 1, 3, 1, 3, 4, 3, 3, 2, 2, 4, 2, 2 });
+            AddToDB("Akali", "jungle", "R->Q->E->W - W at lvl 4", new int[] { 1, 3, 1, 2, 1, 4, 1, 3, 1, 3, 4, 3, 3, 2, 2, 4, 2, 2 });
+
+            AddToDB("Alistar", "support", "R->Q->W->E - Just standart support!", new int[] { 1, 2, 3, 1, 1, 4, 1, 2, 1, 2, 4, 2, 2, 3, 3, 4, 3, 3 });
+            AddToDB("Alistar", "killer", "R->W->Q->E - Maximize W (have best AP ratio and damage)", new int[] { 2, 1, 3, 2, 2, 4, 2, 1, 2, 1, 4, 1, 1, 3, 3, 4, 3, 3 });
+
+            AddToDB("Amumu", "jungle", "R->E->Q->W - Q taking at 4", new int[] { 3, 2, 3, 1, 3, 4, 3, 1, 3, 1, 4, 1, 1, 2, 2, 4, 2, 2 });
+            AddToDB("Amumu", "puller", "R->Q->E->W - AP version, maxing Q first", new int[] { 3, 1, 2, 1, 1, 4, 1, 3, 1, 3, 4, 3, 3, 2, 2, 4, 2, 2 });
+
+            AddToDB("Anivia", "mid", "R->E->Q->W - Taking W at 4", new int[] { 1, 3, 3, 2, 3, 4, 3, 1, 3, 1, 4, 1, 1, 2, 2, 4, 2, 2 });
+
+            AddToDB("Annie", "mid", "R->Q->W->E - Taking E at 4, W at 1", new int[] { 2, 1, 1, 3, 1, 4, 1, 2, 1, 2, 4, 2, 2, 3, 3, 4, 3, 3 });
+
+            AddToDB("Ashe", "standart", "R->W->Q->E - Taking E at 4", new int[] { 2, 1, 2, 3, 2, 4, 2, 1, 2, 1, 4, 1, 1, 3, 3, 4, 3, 3 });
+
+            AddToDB("MasterYi", "lane", "R->E->Q->W - Maxing E for uber TRUE damage. Aggressive play.", new int[] { 1, 3, 2, 3, 3, 4, 3, 1, 3, 1, 4, 1, 1, 2, 2, 4, 2, 2 });
+            AddToDB("MasterYi", "jungle", "R->Q->E->W - Maxing Q for uber fast camp clear.", new int[] { 1, 3, 2, 1, 1, 4, 1, 3, 1, 3, 4, 3, 3, 2, 2, 4, 2, 2 });
+
+            AddToDB("Taric", "heal", "R->W->Q->E - outsustain those guys!", new int[] { 2, 3, 2, 1, 2, 4, 2, 1, 2, 1, 4, 1, 1, 3, 3, 4, 3, 3 });
+            AddToDB("Taric", "stun", "R->W->E->Q - stundamage them!", new int[] { 2, 3, 1, 2, 2, 4, 2, 3, 2, 3, 4, 3, 3, 1, 1, 4, 1, 1 });
+
+            AddToDB("Teemo", "poison", "R->E->Q->W - W at 4.", new int[] { 3, 1, 3, 2, 3, 4, 3, 1, 3, 1, 4, 1, 1, 2, 2, 4, 2, 2 });
+            AddToDB("Teemo", "blind", "R->Q->E->W - for uber risky guys.", new int[] { 1, 3, 2, 1, 1, 4, 1, 3, 1, 3, 4, 3, 3, 2, 2, 4, 2, 2 });
+            AddToDB("Teemo", "balance", "R->E+Q->W - try to middle between Q and E, W at 4.", new int[] { 3, 1, 3, 2, 3, 4, 1, 3, 1, 3, 4, 1, 1, 2, 2, 4, 2, 2 });
         }
 
         // Our Hero All Possibilities
