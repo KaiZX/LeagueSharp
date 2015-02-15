@@ -31,12 +31,7 @@ namespace Module_Last_Hit_Helper
 
             Config.AddItem(new MenuItem("Label3", "- Hero Specific Functions - "));
             Config.AddItem(new MenuItem("AnnieQ_LastHit", "Draw LastHits from Annie Q").SetValue(true));
-            // Add Irelia Q someday
-            // Miss Fortune Q too?
-            // 
-
-            //Config.AddItem(new MenuItem("Label1", "- Core Functions - "));
-
+            
             Config.AddToMainMenu();
         }
 
@@ -67,7 +62,7 @@ namespace Module_Last_Hit_Helper
             foreach (Obj_AI_Base Victim in MinionManager.GetMinions(2000f))
             {
                 if (Player.GetAutoAttackDamage(Victim) > Victim.Health)
-                    Render.Circle.DrawCircle(Victim.Position, 90f, Color.Yellow);
+                    Render.Circle.DrawCircle(Victim.Position, 60f, Color.Yellow);
             }
         }
         static void Draw_NearDeath()
@@ -75,12 +70,16 @@ namespace Module_Last_Hit_Helper
             foreach (Obj_AI_Base Victim in MinionManager.GetMinions(2000f))
             {
                 if (Player.GetAutoAttackDamage(Victim)*2.5 > Victim.Health)
-                    Render.Circle.DrawCircle(Victim.Position, 85f, Color.YellowGreen);
+                    Render.Circle.DrawCircle(Victim.Position, 55f, Color.YellowGreen);
             }
         }
         static void Draw_RelicShield()
         {
             if (!RelicShield.IsOwned())
+                return;
+
+            var Buff = Player.Buffs.Where(x => x.Name == "talentreaperdisplay").FirstOrDefault();
+            if (Buff == null || Buff.Count == 0)
                 return;
 
             float DMG = Player.TotalAttackDamage() + 200;
@@ -89,9 +88,9 @@ namespace Module_Last_Hit_Helper
                 if (Victim.CountAlliesInRange(1100f) > 1)
                 {
                     if (DMG > Victim.Health)
-                        Render.Circle.DrawCircle(Victim.Position, 100f, Color.Cyan);
+                        Render.Circle.DrawCircle(Victim.Position, 50f, Color.Cyan);
                     if (Config.Item("Relic_PreLastHit").GetValue<bool>() && DMG + 100 > Victim.Health)
-                        Render.Circle.DrawCircle(Victim.Position, 95f, Color.DarkCyan);
+                        Render.Circle.DrawCircle(Victim.Position, 45f, Color.DarkCyan);
                 }
             }
         }
@@ -100,15 +99,19 @@ namespace Module_Last_Hit_Helper
             if (!TargonsBrace.IsOwned())
                 return;
 
+            var Buff = Player.Buffs.Where(x => x.Name == "talentreaperdisplay").FirstOrDefault();
+            if (Buff == null || Buff.Count == 0)
+                return;
+
             float DMG = Player.TotalAttackDamage() + 240;
             foreach (Obj_AI_Base Victim in MinionManager.GetMinions(2000f))
             {
                 if (Victim.CountAlliesInRange(1100f) > 1)
                 {
                     if (DMG > Victim.Health)
-                        Render.Circle.DrawCircle(Victim.Position, 100f, Color.Cyan);
+                        Render.Circle.DrawCircle(Victim.Position, 50f, Color.Cyan);
                     if (Config.Item("Relic_PreLastHit").GetValue<bool>() && DMG + 100 > Victim.Health)
-                        Render.Circle.DrawCircle(Victim.Position, 95f, Color.DarkCyan);
+                        Render.Circle.DrawCircle(Victim.Position, 45f, Color.DarkCyan);
                 }
             }
         }
@@ -117,15 +120,19 @@ namespace Module_Last_Hit_Helper
             if (!FaceOfTheMountain.IsOwned())
                 return;
 
+            var Buff = Player.Buffs.Where(x => x.Name == "talentreaperdisplay").FirstOrDefault();
+            if (Buff == null || Buff.Count == 0)
+                return;
+
             float DMG = Player.TotalAttackDamage() + 400;
             foreach (Obj_AI_Base Victim in MinionManager.GetMinions(2000f))
             {
                 if (Victim.CountAlliesInRange(1100f) > 1)
                 {
                     if (DMG > Victim.Health)
-                        Render.Circle.DrawCircle(Victim.Position, 100f, Color.Cyan);
+                        Render.Circle.DrawCircle(Victim.Position, 50f, Color.Cyan);
                     if (Config.Item("Relic_PreLastHit").GetValue<bool>() && DMG + 100 > Victim.Health)
-                        Render.Circle.DrawCircle(Victim.Position, 95f, Color.DarkCyan);
+                        Render.Circle.DrawCircle(Victim.Position, 45f, Color.DarkCyan);
                 }
             }
         }
@@ -144,7 +151,7 @@ namespace Module_Last_Hit_Helper
             foreach (Obj_AI_Base Victim in MinionManager.GetMinions(2000f))
             {
                 if (Q.IsKillable(Victim))
-                    Render.Circle.DrawCircle(Victim.Position, 110f, Color.Orange);
+                    Render.Circle.DrawCircle(Victim.Position, 90f, Color.Orange);
             }
         }
 
