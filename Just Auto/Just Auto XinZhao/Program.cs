@@ -128,9 +128,8 @@ namespace Just_Auto_XinZhao
             Config.AddItem(new MenuItem("W_Setting", "Cast W condition").SetValue(new StringList(new[] { "Never", "After Q", "After E", "Always if near enemy hero" }, 0)));
 
             Config.AddItem(new MenuItem("Label4", "- E functions -"));
-            Config.AddItem(new MenuItem("E_Setting", "(Not working) Cast E condition").SetValue(new StringList(new[] { "Never", "Mouse Selected Target + Toggle", "Mouse Selected Target Always" }, 0)));
-            Config.AddItem(new MenuItem("Smite_After_E", "Cast SMITE if can?").SetValue(new StringList(new[] { "Always Off", "On Toggle", "Always On" }, 2)));
-            Config.AddItem(new MenuItem("Items_After_E", "Cast ITEMS if can?").SetValue(new StringList(new[] { "Always Off", "On Toggle", "Always On" }, 2)));
+            Config.AddItem(new MenuItem("Smite_After_E", "Cast SMITE if can?").SetValue(new StringList(new[] { "Always Off", "On Toggle (After E)", "On Toggle (Near Enemy)", "Always On" }, 3)));
+            Config.AddItem(new MenuItem("Items_After_E", "Cast ITEMS if can?").SetValue(new StringList(new[] { "Always Off", "On Toggle (After E)", "On Toggle (Near Enemy)", "Always On" }, 3)));
 
             Config.AddItem(new MenuItem("Label5", "- (WIP) R functions -"));
             // Cast R: ... When?
@@ -156,7 +155,6 @@ namespace Just_Auto_XinZhao
         static int Q_SettingStatus { get { return Config.Item("Q_Setting").GetValue<StringList>().SelectedIndex; } }
         static int Q_SettingAAStatus { get { return Config.Item("Q_SettingAA").GetValue<StringList>().SelectedIndex; } }
         static int W_SettingStatus { get { return Config.Item("W_Setting").GetValue<StringList>().SelectedIndex; } }
-        // static int E_SettingStatus { get { return Config.Item("E_Setting").GetValue<StringList>().SelectedIndex; } }
         static int ESMITE_SettingStatus { get { return Config.Item("Smite_After_E").GetValue<StringList>().SelectedIndex; } }
         static int EITEMS_SettingStatus { get { return Config.Item("Items_After_E").GetValue<StringList>().SelectedIndex; } }
         static int EKS_SettingStatus { get { return Config.Item("KillSecure_E").GetValue<StringList>().SelectedIndex; } }
@@ -203,13 +201,21 @@ namespace Just_Auto_XinZhao
                     CastQ();
                 if (W_SettingStatus == 3)
                     CastW();
+                if (ESMITE_SettingStatus == 3 || (ESMITE_SettingStatus == 2 && KeyToggled))
+                {
+                    CastSmite(Target);
+                }
+                if (EITEMS_SettingStatus == 3 || (EITEMS_SettingStatus == 2 && KeyToggled))
+                {
+                    CastAllItems(Target);
+                }
             }
         }
         // Draw ER KS functions
         static void DrawEKS()
         {
-            var CanE = E.IsReady() && ((EKS_SettingStatus == 2) || (EKS_SettingStatus == 1 && KeyToggled));
-            var CanR = R.IsReady() && ((RKS_SettingStatus == 2) || (RKS_SettingStatus == 1 && KeyToggled));
+            var CanE = E.IsReady();
+            var CanR = R.IsReady();
 
             if (CanE)
             foreach (Obj_AI_Hero Victim in HeroManager.Enemies)
@@ -265,11 +271,11 @@ namespace Just_Auto_XinZhao
             // If E Casted
             if (args.SData.Name == Player.Spellbook.GetSpell(SpellSlot.E).Name)
             {
-                if ((ESMITE_SettingStatus == 2 || (ESMITE_SettingStatus == 1 && KeyToggled)) && Target.Type == GameObjectType.obj_AI_Hero)
+                if ((ESMITE_SettingStatus == 3 || (ESMITE_SettingStatus == 1 && KeyToggled)) && Target.Type == GameObjectType.obj_AI_Hero)
                 {
                     CastSmite(Target);
                 }
-                if ((EITEMS_SettingStatus == 2 || (EITEMS_SettingStatus == 1 && KeyToggled)) && Target.Type == GameObjectType.obj_AI_Hero)
+                if ((EITEMS_SettingStatus == 3 || (EITEMS_SettingStatus == 1 && KeyToggled)) && Target.Type == GameObjectType.obj_AI_Hero)
                 {
                     CastAllItems(Target);
                 }
