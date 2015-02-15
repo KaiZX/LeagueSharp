@@ -29,6 +29,9 @@ namespace Module_Debug
         
         static void OnTick(EventArgs args)
         {
+            if (Config.Item("Enabled").GetValue<bool>())
+                return;
+
             if (Config.Item("WriteBuffs").GetValue<bool>())
             {
                 foreach (BuffInstance Baff in ObjectManager.Player.Buffs)
